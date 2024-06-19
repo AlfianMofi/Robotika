@@ -1,0 +1,315 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+  info [
+    "Example use of a spherical Camera device."
+  ]
+  title "Spherical Camera"
+}
+Viewpoint {
+  orientation 0.01765603153514036 0.9997779810714006 0.011500135443734625 1.257102156747809
+  position -0.3705643374520311 0.034550544609466945 1.2908714447331469
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+}
+DEF GREEN_OBJECT Solid {
+  translation -0.21473646 -0.43026667 0.05
+  rotation 0.0026909805133862965 -0.0026909805133862965 -0.9999927585976576 1.5708
+  children [
+    DEF BOX_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 0
+        roughness 0.2189099510000001
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.23 0.1
+      }
+    }
+  ]
+  name "green object"
+  boundingObject USE BOX_SHAPE
+}
+DEF BLUE_OBJECT Solid {
+  translation 0.393343 -0.199452 0.07
+  rotation -0.45854819001874086 -0.6283842603974643 -0.6283842603974643 -2.281714
+  children [
+    DEF SPHERE_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 1
+        roughness 0.519341125
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.07
+        subdivision 2
+      }
+    }
+  ]
+  name "blue object"
+  boundingObject USE SPHERE_SHAPE
+}
+DEF PINK_OBJECT Solid {
+  translation 0.0630102 0.210413 0.05
+  rotation 0.7071067811865476 0.7071067811865476 0 3.14159
+  children [
+    DEF CYLINDER_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.1 0.3
+        roughness 0.16827074099999995
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.1
+        radius 0.1
+        subdivision 20
+      }
+    }
+  ]
+  name "pink object"
+  boundingObject USE CYLINDER_SHAPE
+}
+Robot {
+  translation -0.36777553503952753 0.17297587852246388 -0.00022595975059409162
+  rotation 0.014290304703022295 -0.016148953373849983 -0.9997674722136263 -1.4488127092759822
+  children [
+    Pose {
+      translation 0 0 0.0415
+      rotation 0 0 1 -1.570796
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.74902 0.74902 0.74902
+            roughness 1
+            metalness 0
+          }
+          geometry DEF BODY Cylinder {
+            height 0.08
+            radius 0.045
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 141.41920357720977
+        axis 0 1 0
+        anchor 0 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+          consumptionFactor 70
+        }
+        PositionSensor {
+          name "left wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.04499999999999999 0.025
+        rotation -0.7048661737977998 0.7048663602776932 -0.07954301468090662 2.9828408823285266
+        children [
+          DEF WHEEL Pose {
+            rotation 0.577656895078166 0.5771968951617173 -0.5771968951617173 -2.093935
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.301961 0.301961 0.301961
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.025
+                }
+              }
+            ]
+          }
+        ]
+        name "left wheel"
+        boundingObject USE WHEEL
+        physics DEF PHYSICS_WHEEL Physics {
+          density -1
+          mass 0.05
+        }
+        linearVelocity 0.009142612089801551 0.07443998559445669 -8.270935453676026e-07
+        angularVelocity -2.977625508812966 0.36571478327852214 2.2822989174601535e-05
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 110.73909756866223
+        axis 0 1 0
+        anchor 0 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+          consumptionFactor 70
+        }
+        PositionSensor {
+          name "right wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.045000000000000005 0.025
+        rotation 0.6683949042101998 -0.6683948430861321 -0.32633814634777647 2.51070923879361
+        children [
+          USE WHEEL
+        ]
+        name "right wheel"
+        boundingObject USE WHEEL
+        physics USE PHYSICS_WHEEL
+        linearVelocity 0.009142718543826688 0.07444088220040894 8.212715863466879e-07
+        angularVelocity -2.9776256104465806 0.3657143296394512 2.200277267497614e-05
+      }
+    }
+    DEF US0 DistanceSensor {
+      translation 0.042 0.02 0.063
+      rotation 0 0 -1 -0.499205
+      children [
+        DEF SONAR_SENSOR Pose {
+          rotation 0.577656895078166 0.5771968951617173 -0.5771968951617173 -2.093935
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.301961 0.301961 0.301961
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.004
+                radius 0.008
+              }
+            }
+          ]
+        }
+      ]
+      name "us0"
+      lookupTable [
+        0 0.7 0
+        0.2 0 0
+      ]
+      type "sonar"
+      numberOfRays 20
+    }
+    DEF US1 DistanceSensor {
+      translation 0.042 -0.02 0.063
+      rotation 0 0 1 -0.500795
+      children [
+        USE SONAR_SENSOR
+      ]
+      name "us1"
+      lookupTable [
+        0 0.7 0
+        0.2 0 0
+      ]
+      type "sonar"
+      numberOfRays 20
+    }
+    DEF SPHERICAL_CAMERA Camera {
+      translation 0 0 0.15
+      rotation 0 1 0 1.5708
+      children [
+        DEF LENS Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 1.1102230246251565e-16
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.005
+            subdivision 2
+          }
+        }
+        DEF STRUCTURE_AXES Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.02 0.02 0.02
+            }
+          }
+          geometry IndexedLineSet {
+            coord Coordinate {
+              point [
+                -0.01 0 0
+                0.08 -0.01 0
+                0.08 0.01 0
+                0.08 0 0.01
+                0.08 0 -0.01
+              ]
+            }
+            coordIndex [
+              0, 1, 0, 2, 0, 3, 0, 4
+            ]
+          }
+        }
+        DEF CAMERA_SHAPE Pose {
+          translation -0.01 0 0
+          rotation 0 1 0 1.5708
+          children [
+            DEF CAMERA_OUTLINE Shape {
+              appearance PBRAppearance {
+                baseColor 0.898039 0.898039 0.898039
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.008
+              }
+            }
+          ]
+        }
+      ]
+      fieldOfView 3.1415
+      width 128
+      height 128
+      projection "spherical"
+      antiAliasing TRUE
+    }
+    DEF SMILE Pose {
+      translation 0.036 0 0.025
+      rotation 0.25056300542381216 -0.9351130202419243 -0.25056300542381216 1.637834
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.301961 0.301961 0.301961
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.018
+            radius 0.009
+            subdivision 3
+          }
+        }
+      ]
+    }
+  ]
+  name "MyBot"
+  boundingObject Pose {
+    translation 0 0 0.0415
+    rotation 0 0 1 -1.570796
+    children [
+      USE BODY
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 0.5
+    centerOfMass [
+      0 0 0.05
+    ]
+  }
+  controller "spherical_camera"
+  linearVelocity 0.00914218192615103 0.0744404982051904 -2.762812414188368e-09
+  angularVelocity -2.462718646997718e-06 -1.8442293226687652e-05 3.176253371696826e-05
+}
